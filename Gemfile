@@ -69,3 +69,4 @@ end
 gem "tailwindcss-rails", "~> 2.3"
 gem 'jquery-rails'
 gem "devise", "~> 4.9"
+gem 'redis'
