@@ -1,0 +1,21 @@
+<div>
+  <h1>
+    <%= @channel.name%>
+   </h1>
+   <div id = 'messages'>
+   <div id = 'message-container'>
+    <% if @messages.any? %>
+      <%= render @messages %>
+  <%end%>
+   </div>
+ </div>
+
+    <%= form_with model:[@channel,@message],remote: true,class: "" do |f| %>
+      <div class="field">
+          <%= f.text_field :body, class: '', placeholder: "Enter a message..." %>
+          <%= button_tag(type: 'submit',class:'hidden')do %>
+          Submit
+        <% end %>
+      </div>
+    <% end %>
+</div>

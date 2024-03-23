@@ -1,0 +1,3 @@
+<% if message.user %>
+  <p><%= message.user.email.split('@').first %>: <%= message.body %></p>
+<% end %>
