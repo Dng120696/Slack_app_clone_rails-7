@@ -2,9 +2,11 @@
   <h1 class="font-bold text-4xl">Home#index</h1>
   <p>Find me in app/views/home/index.html.erb</p>
 </div>
-
+<%= link_to 'Add Channel' , new_channel_path %>
 <% @channels.each do |channel| %>
+  <div>
   <%= link_to channel.name , channel_path(channel) %>
+  </div>
 
 <%end%>
 <%= button_to 'Log Out',destroy_user_session_path, method: :delete,data:{turbo_confirm: 'Are you sure you want to Log out?'} %>

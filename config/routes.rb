@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :channels do
     resources :messages, only: [:create]
-
+    post 'add_users', on: :member
   end
   mount ActionCable.server, at: '/cable'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

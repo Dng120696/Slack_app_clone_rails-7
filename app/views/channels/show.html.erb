@@ -1,3 +1,16 @@
+<%= form_with(url: add_users_channel_path(@channel), method: :post) do |f| %>
+  <% User.all.each do |user| %>
+    <% unless user == current_user %>
+    <div>
+      <%= check_box_tag 'user_ids[]', user.id %>
+      <%= label_tag "user_#{user.id}", user.email %>
+    </div>
+    <%end%>
+  <% end %>
+  <%= f.submit "Add User to Channel" %>
+<% end %>
+
+
 <div>
   <h1>
     <%= @channel.name%>
