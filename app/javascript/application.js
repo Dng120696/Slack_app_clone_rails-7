@@ -5,20 +5,26 @@ import "controllers";
 import "channels";
 
 window.scroll_bottom = function () {
-  if ($("#messages").length > 0) {
-    $("#messages").scrollTop($("#messages")[0].scrollHeight);
+  let messages = document.getElementById("messages");
+  if (messages) {
+    messages.scrollTop = messages.scrollHeight;
   }
 };
 
 window.submit_message = function () {
-  $("#message_body").on("keydown", function (e) {
-    if (e.keyCode === 13) {
-      $("button").click();
-      e.target.value = "";
-    }
-  });
+  let messageInput = document.getElementById("message_body");
+  if (messageInput) {
+    messageInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        // Enter key
+        document.querySelector("button").click();
+        e.target.value = "";
+      }
+    });
+  }
 };
-$(document).on("turbo:load", function () {
+
+document.addEventListener("turbo:load", function () {
   scroll_bottom();
   submit_message();
 });

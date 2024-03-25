@@ -1,6 +1,6 @@
 <%= form_with(url: add_users_channel_path(@channel), method: :post) do |f| %>
   <% User.all.each do |user| %>
-    <% unless user == current_user %>
+    <% unless @channel.users.include?(user) %>
     <div>
       <%= check_box_tag 'user_ids[]', user.id %>
       <%= label_tag "user_#{user.id}", user.email %>

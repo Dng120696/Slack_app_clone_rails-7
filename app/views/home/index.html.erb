@@ -2,10 +2,12 @@
   <h1 class="font-bold text-4xl">Home#index</h1>
   <p>Find me in app/views/home/index.html.erb</p>
 </div>
-<%= link_to 'Add Channel' , new_channel_path %>
+<%= link_to raw('<i class="fa-solid fa-plus"></i> Add Channel') , new_channel_path,class: 'font-bold'%>
+<h1 class= 'font-bold'> Channels</h1>
 <% @channels.each do |channel| %>
-  <div>
+  <div class = 'flex items-center gap-2 indent-3'>
   <%= link_to channel.name , channel_path(channel) %>
+  <%= button_to 'Delete', channel_path(channel), method: :delete, data:{turbo_confirm: 'Are you sure?'},class: 'text-gray-400 text-sm'%>
   </div>
 
 <%end%>

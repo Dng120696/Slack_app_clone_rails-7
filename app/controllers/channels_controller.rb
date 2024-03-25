@@ -27,16 +27,21 @@ def add_users
   @channel = Channel.find(params[:id])
   user_ids = Array(params[:user_ids])
 
-  if @channel.users << User.where(id: user_ids)
+  existing_user_ids = @channel.user_ids
+  new_user_ids = user_ids - existing_user_ids
+
+  if new_user_ids.present?
+    @channel.users << User.where(id: new_user_ids)
     redirect_to @channel, notice: "Users added to channel successfully."
   else
-    redirect_to @channel, alert: "Failed to add users to channel."
+    redirect_to @channel, alert: "No more users to add."
   end
 end
 
 def destroy
   @channel = current_user.channels.find(params[:id])
   @channel.destroy
+  redirect_to root_path
 end
 # def add_user
 #   @channel = Channel.find(params[:id])
