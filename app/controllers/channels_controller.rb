@@ -1,7 +1,7 @@
 class ChannelsController < ApplicationController
 
 def index
-
+  @channels = current_user.channels
 end
 def show
   @channel = current_user.channels.find(params[:id])
@@ -15,11 +15,15 @@ end
 
 def create
   @channel = current_user.channels.create(channel_params)
+  respond_to do |format|
+    if @channel.save
+      format.html{ redirect_to root_path,  notice: 'Successfully Created a Channel.'}
+      format.turbo_stream{ render :create, locals: {channel: @channel}}
 
-  if @channel.save
-    redirect_to root_path, notice: 'Successfully Created a Channel.'
-  else
-    render :new
+    else
+      format.html{ redirect_to :new,  status: :unprocessable_entity}
+      format.turbo_stream{ render :new, status: :unprocessable_entity, locals: {channel: @channel}}
+    end
   end
 end
 
@@ -43,16 +47,7 @@ def destroy
   @channel.destroy
   redirect_to root_path
 end
-# def add_user
-#   @channel = Channel.find(params[:id])
-#   @user = User.find(params[:user_id])
 
-#   if @channel.users << @user
-#     redirect_to @channel, notice: "User added to channel successfully."
-#   else
-#     redirect_to @channel, alert: "Failed to add user to channel."
-#   end
-# end
 private
 
 def channel_params

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'channels#index'
   devise_for :users
 
   resources :channels do

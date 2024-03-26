@@ -1,0 +1,7 @@
+<%= render 'shared/error-message',obj: channel%>
+
+<%= form_with model:channel,data:{turbo:false} do |f|%>
+  <%= f.text_field :name, placeholder:'Channel Name...' %>
+
+  <%= f.submit 'Create Channel'%>
+<%end%>

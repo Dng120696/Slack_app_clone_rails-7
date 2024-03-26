@@ -1,3 +1,5 @@
+
+
 <%= form_with(url: add_users_channel_path(@channel), method: :post) do |f| %>
   <% User.all.each do |user| %>
     <% unless @channel.users.include?(user) %>
@@ -17,6 +19,8 @@
    </h1>
    <div id = 'messages'>
    <div id = 'message-container'>
+   <%= render 'shared/error-message',obj: @message%>
+
     <% if @messages.any? %>
       <%= render @messages %>
   <%end%>
